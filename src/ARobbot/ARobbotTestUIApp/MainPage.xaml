@@ -1,0 +1,48 @@
+﻿<Page
+    x:Class="ARobbotTestUIApp.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ARobbotTestUIApp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70*"/>
+            <RowDefinition Height="70*"/>
+            <RowDefinition Height="289*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100*"/>
+            <ColumnDefinition Width="100*"/>
+            <ColumnDefinition Width="100*"/>
+            <ColumnDefinition Width="100*"/>
+            <ColumnDefinition Width="100*"/>
+            <ColumnDefinition Width="100*"/>
+            <ColumnDefinition Width="100*"/>
+            <ColumnDefinition Width="100*"/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="buttonMotor1Start" Content="Start" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="0" Background="#7F0CFF00"/>
+        <Button x:Name="buttonMotor1Stop" Content="Stop" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="1" Background="#7FFF0000"/>
+        <Button x:Name="buttonMotor1Forward" Content="^^^" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="2"/>
+        <Button x:Name="buttonMotor1Backward" Content="vvv" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="3"/>
+
+        <Button x:Name="buttonMotor2Backward" Content="vvv" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="4"/>
+        <Button x:Name="buttonMotor2Forward" Content="^^^" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="5"/>
+        <Button x:Name="buttonMotor2Stop" Content="Stop" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="6" Background="#7FFF0000"/>
+        <Button x:Name="buttonMotor2Start" Content="Start" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="7" Background="#7F0CFF00"/>
+
+        <Button x:Name="buttonAllMotorsStart" Content="Start" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" Grid.Column="0" Background="#7F0CFF00"/>
+        <Button x:Name="buttonAllMotorsStop" Content="Stop" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" Grid.Column="1" Background="#7FFF0000"/>
+        <Button x:Name="buttonAllMotorsForward" Content="^^^" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" Grid.Column="6"/>
+        <Button x:Name="buttonAllMotorsBackward" Content="vvv" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" Grid.Column="7"/>
+
+        <Slider x:Name="sliderBarSpeedMotor1" RenderTransformOrigin="0.5,0.5" Orientation="Vertical" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="0,10" />
+        <Slider x:Name="sliderBarSpeedMotor2" RenderTransformOrigin="0.5,0.5" Orientation="Vertical" Grid.Row="2" Grid.Column="6" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="0,10" />
+        <Slider x:Name="sliderBarSpeedAllMotors" RenderTransformOrigin="0.5,0.5" Orientation="Vertical" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="0,10" />
+
+        <TextBlock x:Name="textBlockSpeed1" VerticalAlignment="Top"  HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="Speed" Height="30" Grid.Row="1" Grid.Column="2" TextAlignment="Left"/>
+        <TextBlock x:Name="textBlockSpeed2" VerticalAlignment="Top"  HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="Speed" Height="30" Grid.Row="1" Grid.Column="5" TextAlignment="Right"/>
+    </Grid>
+</Page>

@@ -1,0 +1,1 @@
+MainPackage=C:\Users\Slavcho\Desktop\ARobbot\Arobbot.ControlUIApp\bin\ARM\Release\Arobbot.ControlUIApp_0.0.2.0_ARM.appx

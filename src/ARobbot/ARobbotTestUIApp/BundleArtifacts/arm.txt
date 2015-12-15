@@ -1,0 +1,1 @@
+MainPackage=C:\Users\Slavcho\Desktop\ARobbot\ARobbotTestUIApp\bin\ARM\Release\ARobbotTestUIApp_0.0.9.0_ARM.appx

@@ -1,0 +1,1 @@
+MainPackage=C:\Users\Slavcho\Desktop\ARobbot\ARobbotTestUIApp\bin\x64\Debug\ARobbotTestUIApp_1.0.0.0_x64_Debug.appx

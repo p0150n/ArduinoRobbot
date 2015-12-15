@@ -1,0 +1,208 @@
+#include "Arduino.h"
+#include "Stepper.h"
+
+const int numberOfMotors = 2;
+const int numberOfSteps = 200;
+
+//Motor 1 pins
+const int Motor1Pin1 = 2;
+const int Motor1Pin2 = 3;
+const int Motor1Pin3 = 4;
+const int Motor1Pin4 = 5;
+//Motor 2 pins
+const int Motor2Pin1 = 6;
+const int Motor2Pin2 = 7;
+const int Motor2Pin3 = 8;
+const int Motor2Pin4 = 12;
+
+const int AllMotors = -1;
+
+Stepper motors[numberOfMotors] = { Stepper(numberOfSteps, Motor1Pin1,
+		Motor1Pin2, Motor1Pin3, Motor1Pin4), Stepper(numberOfSteps, Motor2Pin1,
+		Motor2Pin2, Motor2Pin3, Motor2Pin4) };
+
+int motorsDirections[numberOfMotors] = { 1, 1 };
+unsigned long motorsStepDelay[numberOfMotors] = { 10L, 10L };
+unsigned long motorsLastStepTime[numberOfMotors] = { 0L, 0L };
+bool motorsStoped[numberOfMotors] = { true, true };
+
+char resivedChar;
+
+void setup() {
+	Serial.begin(9600);
+	SetMotorRPM(-1, 10);
+	StopMotor(-1);
+	delay(50);
+}
+
+// The loop function is called in an endless loop
+void loop() {
+	while (Serial.available()) {
+		resivedChar = GetNextCharFromSerial();
+
+		if (resivedChar == 'M') {
+			//Serial.write("Motor command: ");
+			ProcessMotorComand();
+		}
+	}
+
+
+	for (int i = 0; i < numberOfMotors; ++i) {
+		if(motorsStoped[i]){
+			continue;
+		}
+
+	    unsigned long now = micros();
+		if(now - motorsLastStepTime[i] >= motorsStepDelay[i]){
+			motorsLastStepTime[i] = now;
+			motors[i].step(motorsDirections[i]);
+		}
+	}
+}
+
+//Command processing
+char GetNextCharFromSerial() {
+	while (true) {
+		if (Serial.available()) {
+			return Serial.read();
+		}
+	}
+}
+
+void ProcessMotorComand() {
+	resivedChar = GetNextCharFromSerial();
+	byte motorNumber = byte(resivedChar);
+
+	if (resivedChar == 'A') {
+		//Serial.write("all motors: ");
+		ProcessCommandForMontorNumber(AllMotors);
+	} else if (motorNumber >= 0 || motorNumber <= 9) {
+		//Serial.write(" motor number ");
+		//Serial.write(motorNumber);
+		//Serial.write(" :");
+		ProcessCommandForMontorNumber(resivedChar - '0');
+	}
+}
+
+void ProcessCommandForMontorNumber(int motorNumber) {
+	resivedChar = GetNextCharFromSerial();
+	if (resivedChar == 'S') {
+		if (GetNextCharFromSerial() == ';') {
+			StopMotor(motorNumber);
+		}
+	} else if (resivedChar == 'F') {
+		if (GetNextCharFromSerial() == ';') {
+			SetMotorDirection(motorNumber, 1);
+		}
+	} else if (resivedChar == 'B') {
+		if (GetNextCharFromSerial() == ';') {
+			SetMotorDirection(motorNumber, -1);
+		}
+	} else if (resivedChar == 'R') {
+		ProcessCommandRPM(motorNumber);
+	}
+}
+
+void ProcessCommandRPM(int motorNumber) {
+	int rpm = 0;
+	rpm += (GetNextCharFromSerial() - '0') * 100;
+	rpm += (GetNextCharFromSerial() - '0') * 10;
+	rpm += (GetNextCharFromSerial() - '0');
+
+	if (rpm >= 1 && rpm <= 999 && GetNextCharFromSerial() == ';') {
+		SetMotorRPM(motorNumber, rpm);
+	}
+}
+
+//Motors Commands
+bool StopMotor(int motorNumber) {
+	Serial.print("Stop motor: ");
+	Serial.print(motorNumber);
+
+	if (motorNumber == AllMotors) {
+		//Stop all motors
+		for (int i = 0; i < numberOfMotors; ++i) {
+			motorsStoped[i] = true;
+		}
+	} else if (motorNumber >= 0 && motorNumber < numberOfMotors) {
+		//Stop motor
+		motorsStoped[motorNumber] = true;
+	} else {
+		return false;
+	}
+
+	return true;
+}
+
+bool StartMotor(int motorNumber) {
+	Serial.print("Start motor: ");
+	Serial.print(motorNumber);
+
+	if (motorNumber == AllMotors) {
+		//Start all motors
+		for (int i = 0; i < numberOfMotors; ++i) {
+			motorsStoped[i] = false;
+		}
+	} else if (motorNumber >= 0 && motorNumber < numberOfMotors) {
+		//Start motor
+		motorsStoped[motorNumber] = false;
+	} else {
+		return false;
+	}
+
+	return true;
+}
+
+bool SetMotorDirection(int motorNumber, byte dir) {
+	Serial.print("Set Direction to motor: ");
+	Serial.print(motorNumber);
+	Serial.print(" Direction: ");
+	Serial.print(dir);
+
+	if (dir != 1 && dir != -1) {
+		return false;
+	}
+
+	if (motorNumber == AllMotors) {
+		//Set to all motors direction
+		for (int i = 0; i < numberOfMotors; ++i) {
+			motorsDirections[i] = dir;
+		}
+	} else if (motorNumber >= 0 && motorNumber < numberOfMotors) {
+		//Set to motor number direction
+		motorsDirections[motorNumber] = dir;
+	} else {
+		return false;
+	}
+
+	return true;
+}
+
+bool SetMotorRPM(int motorNumber, int rpm) {
+	Serial.print("Set RPM to motor: ");
+	Serial.print(motorNumber);
+	Serial.print(" RPM: ");
+	Serial.print(rpm);
+
+	if (motorNumber == AllMotors) {
+		//Calculate motors delay for all motors
+		for (int i = 0; i < numberOfMotors; i++) {
+			if (rpm <= 0) {
+				return false;
+			}
+
+			motorsStepDelay[i] = 60L * 1000L * 1000L / numberOfSteps / rpm;
+			StartMotor(motorNumber);
+		}
+	} else if (motorNumber >= 0 && motorNumber < numberOfMotors) {
+		//Calculate motor delay
+		motorsStepDelay[motorNumber] = 60L * 1000L * 1000L / numberOfSteps
+				/ rpm;
+		StartMotor(motorNumber);
+	} else {
+		return false;
+	}
+
+	return true;
+}
+
