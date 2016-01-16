@@ -22,10 +22,10 @@
         private const int NumberOfMotors = 2;
         private const int LeftMotor = 0;
         private const int RightMotor = 1;
-        private const int MotorsMaxSpeed = 120;
+        private const int MotorsMaxSpeed = 80;
         private const int MotorsRPMStep = 1;
         private const int MotorsStartSpeed = 0;
-        private const int WheelStep = 2;
+        private const int WheelStep = 3;
         private MotorDirection[] motorDirection;
         private BluetoothSerial bluetooth;
         private RobbotControler robbot;
@@ -107,7 +107,7 @@
             }
             else if (leftSpeed < -MotorsMaxSpeed)
             {
-                this.TextBlockRPMLeft.Text = (-MotorsMaxSpeed).ToString();
+                this.TextBlockRPMLeft.Text = MotorsMaxSpeed.ToString();
             }
             else
             {
@@ -116,15 +116,15 @@
 
             if (rightSpeed > MotorsMaxSpeed)
             {
-                this.TextBlockRPMLeft.Text = MotorsMaxSpeed.ToString();
+                this.TextBlockRPMRight.Text = MotorsMaxSpeed.ToString();
             }
             else if (rightSpeed < -MotorsMaxSpeed)
             {
-                this.TextBlockRPMLeft.Text = (-MotorsMaxSpeed).ToString();
+                this.TextBlockRPMRight.Text = MotorsMaxSpeed.ToString();
             }
             else
             {
-                this.TextBlockRPMLeft.Text = rightSpeed.ToString();
+                this.TextBlockRPMRight.Text = rightSpeed.ToString();
             }
 
             ChangeMotorState(LeftMotor, leftSpeed);
