@@ -29,7 +29,7 @@ namespace ARobbotTestUIApp
         private const int Motor1 = 0;
         private const int Motor2 = 1;
         private const int MotorsMinRPM = 1;
-        private const int MotorsMaxRPM = 90;
+        private const int MotorsMaxRPM = 400;
         private const int MotorsRPMStep = 1;
         private const int MotorsStartRPM = 1;
 

@@ -19,7 +19,7 @@
 					<entry kind="macro" name="ARDUINO_ARCH_AVR" value="1">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="macro" name="ARDUINO_AVR_UNO" value="1">
+					<entry kind="macro" name="ARDUINO_AVR_NANO" value="1">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="AVR" value="1">
@@ -1335,7 +1335,7 @@
 					<entry kind="macro" name="ARDUINO_ARCH_AVR" value="1">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="macro" name="ARDUINO_AVR_UNO" value="1">
+					<entry kind="macro" name="ARDUINO_AVR_NANO" value="1">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="AVR" value="1">
@@ -2663,7 +2663,7 @@
 					<entry kind="macro" name="ARDUINO_ARCH_AVR" value="1">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="macro" name="ARDUINO_AVR_UNO" value="1">
+					<entry kind="macro" name="ARDUINO_AVR_NANO" value="1">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="AVR" value="1">
@@ -3979,7 +3979,7 @@
 					<entry kind="macro" name="ARDUINO_ARCH_AVR" value="1">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="macro" name="ARDUINO_AVR_UNO" value="1">
+					<entry kind="macro" name="ARDUINO_AVR_NANO" value="1">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="AVR" value="1">

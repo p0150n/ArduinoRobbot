@@ -1,2 +1,2 @@
 spec.o: \
- D:/ArduinoRobbot/EclipseWorkspace/.metadata/.plugins/org.eclipse.cdt.managedbuilder.core/spec.C
+ C:/Users/Slavcho/OneDrive/ArduinoRobbot/src/EclipseWorkspace/.metadata/.plugins/org.eclipse.cdt.managedbuilder.core/spec.C
